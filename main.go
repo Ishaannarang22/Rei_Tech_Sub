@@ -20,7 +20,7 @@ func main() {
 
 	// Setting up the directory for the static assests
 	var dir string
-	flag.StringVar(&dir, "dir", ".static", "Directory for assets")
+	flag.StringVar(&dir, "dir", "./static", "Directory for assets")
 	flag.Parse()
 
 	// Using Gorilla/Mux
@@ -47,20 +47,16 @@ func main() {
 	// r.HandleFunc("/u/{userhandler/dashboard/drone}", func(w http.ResponseWriter, r http.Request))
 
 	// Custom Setting
-	srv := &http.Server{
+	server := &http.Server{
 		Handler: r,
-		Addr:    "0.0.0.0:80",
+		Addr:    ":443",
 		// Nobody likes Slow Loris Attacks
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 		IdleTimeout:  90 * time.Second,
 	}
 
-	log.Println("Serving on 0.0.0.0 at port 80")
-
-	// Serve
-	err := srv.ListenAndServe()
-	if err != nil {
+	if err := server.ListenAndServeTLS("cert.pem", "key.pem"); err != nil {
 		panic(err)
 	}
 }
