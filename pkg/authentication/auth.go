@@ -16,3 +16,16 @@ func CheckPass(hash, pass string) (bool, error) {
 		return true, nil
 	}
 }
+
+// Encrypt the password using bcrypt
+func EncryptPassword(password string) (string, error) {
+
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), 10)
+
+	if err != nil {
+		return "", err
+	} else {
+		return string(hash), nil
+	}
+
+}

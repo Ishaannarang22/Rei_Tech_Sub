@@ -11,11 +11,33 @@ type User struct {
 	Token    string
 }
 
+// Create new User
+func CreateUser(userIn User) error {
+	db, err := sql.Open("sqlite3", "./users.db")
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+
+	insertUserSQL := `INSERT INTO users(username, password, token) VALUES (?, ?, ?)`
+	statement, err := db.Prepare(insertUserSQL)
+	if err != nil {
+		return err
+	}
+
+	_, err = statement.Exec(userIn.Username, userIn.Password, userIn.Token)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // Read the user data
 func ReadUser(userIn User) (User, error) {
 	var err error
 
-	db, err := sql.Open("sqlite3", "./userData.db")
+	db, err := sql.Open("sqlite3", "./users.db")
 
 	var userOut User
 
