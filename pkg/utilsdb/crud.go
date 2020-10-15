@@ -39,12 +39,35 @@ func ReadUser(userIn User) (User, error) {
 
 	db, err := sql.Open("sqlite3", "./users.db")
 
+	defer db.Close()
+
 	var userOut User
 
 	query := "SELECT password, token FROM users WHERE username=?"
 	err = db.QueryRow(query, userIn.Username).Scan(&userOut.Password, &userOut.Token)
 
-	db.Close()
-
 	return userOut, err
+}
+
+func CheckSession(tkn string) (string, bool, error) {
+	db, err := sql.Open("sqlite3", "./users.db")
+	if err != nil {
+		return "", false, err
+	}
+	defer db.Close()
+
+	var usrname string
+
+	query := `SELECT username FROM users WHERE token=?`
+
+	err = db.QueryRow(query, tkn).Scan(&usrname)
+	if err != nil {
+		return "", false, err
+	}
+
+	if usrname == "" {
+		return "", false, nil
+	}
+
+	return usrname, true, nil
 }

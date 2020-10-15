@@ -29,10 +29,12 @@ func main() {
 	// Setup the templates
 	tmplLoginPage := parseTemplate("./templates/login.html")
 	tmplSignupPage := parseTemplate("./templates/signup.html")
+	tmplMasterDash := parseTemplate("./templates/master.html")
 
 	// Creating Handlers
 	LoginPageHandler := handlers.NewHandler(tmplLoginPage)
 	SignupPageHandler := handlers.NewHandler(tmplSignupPage)
+	MasterDashHandler := handlers.NewHandler(tmplMasterDash)
 
 	// Set-Up the static server
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(dir))))
@@ -41,8 +43,7 @@ func main() {
 	r.HandleFunc("/login", LoginPageHandler.StaticLogin)
 	r.HandleFunc("/u", LoginPageHandler.HandleLogin)
 	r.HandleFunc("/signup", SignupPageHandler.HandleSignup)
-	// r.HandleFunc("/setup", func(w http.ResponseWriter, r http.Request))
-	// r.HandleFunc("/u/{userhandle/dashboard/master}", func(w http.ResponseWriter, r http.Request))
+	r.HandleFunc("/u/{userhandle}/dashboard/master", MasterDashHandler.AuthUser(MasterDashHandler.HandleMasterDash))
 	// r.HandleFunc("/u/{userhandler/dashboard/drone}", func(w http.ResponseWriter, r http.Request))
 
 	// Custom Setting
@@ -60,6 +61,6 @@ func main() {
 	// Serve
 	err := srv.ListenAndServe()
 	if err != nil {
-		log.Fatal(err.Error) // I dont like panic() its inconsistent
+		panic(err)
 	}
 }

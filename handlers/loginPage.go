@@ -40,7 +40,7 @@ func (h *Handler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 
 	// Add cookie to client
 	expiration := time.Now().Add(36500 * 24 * time.Hour)
-	cookie := http.Cookie{Name: "tkn-key", Value: userDB.Token, Expires: expiration, Secure: true}
+	cookie := http.Cookie{Name: "tkn-key", Value: userDB.Token, Expires: expiration}
 	http.SetCookie(w, &cookie)
 
 	// Return a redirect
