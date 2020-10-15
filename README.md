@@ -10,3 +10,6 @@ Project Map
 7. /static/\* (for static files)
 
 **\* Authentication Required**
+
+# Bold Footnotes
+1. *The Logins unlike the signups are handled by two different functions because the Hyper Text Transfer Protocol was not made to do the kinds of thing we do with it today and thus, doesn't allow to us to write cookies after a header has been written and for some reason golang fails this silently*
