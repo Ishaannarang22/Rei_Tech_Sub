@@ -6,7 +6,7 @@ Project Map
 3. /setup (setup the device)
 4. /signup (signup page)
 5. /u/{}/dashboard/master (the users' master dashboard) *
-6. /u/{}/dashboard/drone ( the users' drone dashboard) *
+6. /u/{}/dashboard/drone (the users' drone dashboard) *
 7. /static/\* (for static files)
 
 **\* Authentication Required**
