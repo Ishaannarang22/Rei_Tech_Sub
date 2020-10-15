@@ -1,14 +1,19 @@
 package main
 
 import (
-	// "reitechsub/handlers"
+	"reitechsub/handlers"
 	"flag"
 	"log"
 	"net/http"
+	"html/template"
 	"time"
 
 	"github.com/gorilla/mux"
 )
+
+func parseTemplate(tmplPath string) *template.Template {
+	return template.Must(template.ParseFiles(tmplPath))
+}
 
 func main() {
 	log.Println("Initialsing...")
@@ -21,15 +26,22 @@ func main() {
 	// Using Gorilla/Mux
 	r := mux.NewRouter()
 
+	// Setup the templates
+	tmplLoginPage := parseTemplate("./templates/login.html")
+
+
+	// Creating Handlers
+	LoginPageHandler := handlers.NewHandler(tmplLoginPage)
+
 	// Set-Up the static server
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(dir))))
-	r.HandleFunc("/", func(w http.ResponseWriter, r http.Request))
-	r.HandleFunc("/home", func(w http.ResponseWriter, r http.Request))
-	r.HandleFunc("/login", func(w http.ResponseWriter, r http.Request))
-	r.HandleFunc("/signup", func(w http.ResponseWriter, r http.Request))
-	r.HandleFunc("/setup", func(w http.ResponseWriter, r http.Request))
-	r.HandleFunc("/u/{userhandle/dashboard/master}", func(w http.ResponseWriter, r http.Request))
-	r.HandleFunc("/u/{userhandler/dashboard/drone}", func(w http.ResponseWriter, r http.Request))
+	// r.HandleFunc("/", handlers.)
+	// r.HandleFunc("/home", func(w http.ResponseWriter, r http.Request))
+	r.HandleFunc("/login", LoginPageHandler.HandleLogin)
+	// r.HandleFunc("/signup", func(w http.ResponseWriter, r http.Request))
+	// r.HandleFunc("/setup", func(w http.ResponseWriter, r http.Request))
+	// r.HandleFunc("/u/{userhandle/dashboard/master}", func(w http.ResponseWriter, r http.Request))
+	// r.HandleFunc("/u/{userhandler/dashboard/drone}", func(w http.ResponseWriter, r http.Request))
 
 	// Custom Setting
 	srv := &http.Server {
