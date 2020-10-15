@@ -44,6 +44,7 @@ func main() {
 	r.HandleFunc("/u", LoginPageHandler.HandleLogin)
 	r.HandleFunc("/signup", SignupPageHandler.HandleSignup)
 	r.HandleFunc("/u/{userhandle}/dashboard/master", MasterDashHandler.AuthUser(MasterDashHandler.HandleMasterDash))
+	r.HandleFunc("/voice", handlers.HandleVoice)
 	// r.HandleFunc("/u/{userhandler/dashboard/drone}", func(w http.ResponseWriter, r http.Request))
 
 	// Custom Setting
