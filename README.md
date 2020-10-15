@@ -1,4 +1,4 @@
-## ReiTechSub
+# ReiTechSub
 
 Project Map
 1. / or /home (login or signup)(dashboard, if cookie detected)
@@ -11,5 +11,5 @@ Project Map
 
 **\* Authentication Required**
 
-# Bold Footnotes
+## Bold Footnotes
 1. *The Logins unlike the signups are handled by two different functions because the Hyper Text Transfer Protocol was not made to do the kinds of thing we do with it today and thus, doesn't allow to us to write cookies after a header has been written and for some reason golang fails this silently*
