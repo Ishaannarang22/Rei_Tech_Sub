@@ -116,7 +116,12 @@ function changePage(fname) {
     document.body.innerHTML = "";
     
     //create a form
-    document.body.innerHTML = `<form action="cachetofull" method="post">
+    document.body.innerHTML = `
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" integrity="sha512-5fsy+3xG8N/1PV5MIJz9ZsWpkltijBI48gBzQ/Z2eVATePGHOkMIn+xTDHIfTZFVb9GMpflF2wOWItqxAP2oLQ==" crossorigin="anonymous" />
+</head>
+
+<form action="cachetofull" method="post">
         <input type="date" name="date">
         <input type="time" name="time">
         <input style="visibility: hidden;" name="identifier" value="${fname}">
