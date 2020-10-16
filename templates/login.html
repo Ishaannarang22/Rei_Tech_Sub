@@ -18,16 +18,16 @@
                     <div class="card-body p-0">
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-flex">
-                                <div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;assets/img/login.jpg&quot;);"></div>
+                                <div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;static/img/login.jpg&quot;);"></div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h4 class="text-dark mb-4">Welcome Back!</h4>
                                     </div>
-                                    <form class="user" method="POST" action="/u">
+                                    <form class="user" method="post" action="/u">
                                         <div class="form-group">
-                                            <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username" name="UsernameInput">
+                                            <input class="form-control form-control-user" type="text" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username" name="UsernameInput">
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="PasswordInput">
@@ -41,12 +41,12 @@
                                                 <input class="form-check-input" type="radio" id="formCheck-2" name="StatusInput">
                                                 <label class="form-check-label" for="formCheck-2">Drone</label>
                                             </div>
-                                        </div><button class="btn btn-primary btn-block text-white btn-user" type="submit">Login</button>
+                                        </div><input class="btn btn-primary btn-block text-white btn-user" type="submit">Login</input>
                                         <hr>
                                         <hr>
                                     </form>
                                     <div class="text-center"></div>
-                                    <div class="text-center"><a class="small" href="http://0.0.0.0/register.html">Create an Account!</a></div>
+                                    <div class="text-center"><a class="small" href="http://0.0.0.0/signup">Create an Account!</a></div>
                                 </div>
                             </div>
                         </div>

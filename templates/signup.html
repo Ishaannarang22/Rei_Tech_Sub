@@ -16,14 +16,14 @@
             <div class="card-body p-0">
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-flex">
-                        <div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;assets/img/dogs/image2.jpeg&quot;);"></div>
+                        <div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;static/img/dogs/image2.jpeg&quot;);"></div>
                     </div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
                                 <h4 class="text-dark mb-4">Create an Account!</h4>
                             </div>
-                            <form class="user">
+                            <form class="user" action='signup' method='post'>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="First Name" name="first_name">
@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="UserName" name="email">
+                                    <input class="form-control form-control-user" type="text" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="UserName" name="username">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 col-xl-12 offset-xl-0 mb-3 mb-sm-0">
@@ -45,7 +45,7 @@
                                 <hr>
                             </form>
                             <div class="text-center"></div>
-                            <div class="text-center"><a class="small" href="http://0.0.0.0/login.html">Already have an account? Login!</a></div>
+                            <div class="text-center"><a class="small" href="http://0.0.0.0/login">Already have an account? Login!</a></div>
                         </div>
                     </div>
                 </div>
