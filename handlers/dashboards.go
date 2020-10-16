@@ -57,3 +57,17 @@ func (h *Handler) HandleCacheFile(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "https://0.0.0.0/u/"+username+"/dashboard/master", http.StatusSeeOther)
 }
+
+func HandleTime(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.Write([]byte("Access Denied!"))
+		return
+	}
+
+	if r.FormValue("api_key") != "LlWlRvYlJNihsd8SGZZK" {
+		w.Write([]byte("Access Denied!"))
+		return
+	}
+
+	filePath := r.FormValue("file")
+}

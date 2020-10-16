@@ -47,6 +47,7 @@ func main() {
 	r.HandleFunc("/u/{userhandle}/dashboard/master", MasterDashHandler.AuthUser(MasterDashHandler.HandleMasterDash))
 	r.HandleFunc("/voice", handlers.HandleVoice)
 	r.HandleFunc("/u/{userhandle}/dashboard/cachetofull", VoiceFileHandler.AuthUser(VoiceFileHandler.HandleCacheFile))
+	r.HandleFunc("/u/time", handlers.HandleTime)
 	// r.HandleFunc("/u/{userhandler/dashboard/drone}", func(w http.ResponseWriter, r http.Request))
 
 	// Custom Setting
