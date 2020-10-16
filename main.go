@@ -35,6 +35,7 @@ func main() {
 	LoginPageHandler := handlers.NewHandler(tmplLoginPage)
 	SignupPageHandler := handlers.NewHandler(tmplSignupPage)
 	MasterDashHandler := handlers.NewHandler(tmplMasterDash)
+	VoiceFileHandler := &handlers.Handler{}
 
 	// Set-Up the static server
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(dir))))
@@ -45,6 +46,7 @@ func main() {
 	r.HandleFunc("/signup", SignupPageHandler.HandleSignup)
 	r.HandleFunc("/u/{userhandle}/dashboard/master", MasterDashHandler.AuthUser(MasterDashHandler.HandleMasterDash))
 	r.HandleFunc("/voice", handlers.HandleVoice)
+	r.HandleFunc("/u/{userhandle}/dashboard/cachetofull", VoiceFileHandler.AuthUser(VoiceFileHandler.HandleCacheFile))
 	// r.HandleFunc("/u/{userhandler/dashboard/drone}", func(w http.ResponseWriter, r http.Request))
 
 	// Custom Setting

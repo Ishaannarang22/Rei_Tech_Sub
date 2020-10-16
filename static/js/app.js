@@ -87,10 +87,16 @@ function stopRecording() {
     //create the wav blob and pass it on to createDownloadLink 
     rec.exportWAV(createUpload);
 }
+
 function createUpload(blob) {
+    random_filename = Math.floor((Math.random() * 100000000) + 1);
+    //forms showed limitations using XML
+    finalFile = random_filename +".wav"
     var fd = new FormData();
-    fd.append("fname", new Date()+".wav");
+    fd.append("fname", finalFile);
     fd.append("data", blob);
+    
+    //#AjaxForLife
     $.ajax({
         type: 'POST',
         url: '/voice',
@@ -100,6 +106,21 @@ function createUpload(blob) {
     }).done(function(data) {
         console.log(data);
     });
+    
+    changePage(finalFile);
 
+}
+
+function changePage(fname) {
+    //clear all data
+    document.body.innerHTML = "";
+    
+    //create a form
+    document.body.innerHTML = `<form action="cachetofull" method="post">
+        <input type="date" name="date">
+        <input type="time" name="time">
+        <input style="visibility: hidden;" name="identifier" value="${fname}">
+        <input type="submit">
+    </form>`;
 }
 
