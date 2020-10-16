@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/gorilla/mux"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 )
@@ -70,4 +71,36 @@ func HandleTime(w http.ResponseWriter, r *http.Request) {
 	}
 
 	filePath := r.FormValue("file")
+	filePath = filePath[:len(filePath)-20]
+	_, err := os.Create(filePath + "go.txt")
+	if err != nil {
+		w.Write([]byte("Something Went Wrong!"))
+	}
+}
+
+func (h *Handler) HandleDroneDash(w http.ResponseWriter, r *http.Request) {
+	username := mux.Vars(r)["userhandle"]
+	if *h.Username != username {
+		return
+	}
+
+	h.Tmpl.Execute(w, nil)
+}
+
+func HandleFast(w http.ResponseWriter, r *http.Request) {
+	username := mux.Vars(r)["userhandle"]
+
+	files, err := ioutil.ReadDir("./static/user/" + username + "/")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, v := range files {
+		if v.Name() == "go.txt" {
+			w.Write([]byte("https://0.0.0.0/static/user/" + username + "/" + files[0].Name()))
+			os.Remove("./static/user/" + username + "/go.txt")
+			return
+		}
+	}
+	return
 }

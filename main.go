@@ -30,17 +30,20 @@ func main() {
 	tmplLoginPage := parseTemplate("./templates/login.html")
 	tmplSignupPage := parseTemplate("./templates/signup.html")
 	tmplMasterDash := parseTemplate("./templates/master.html")
+	tmplDroneDash := parseTemplate("./templates/drone.html")
 
 	// Creating Handlers
 	LoginPageHandler := handlers.NewHandler(tmplLoginPage)
 	SignupPageHandler := handlers.NewHandler(tmplSignupPage)
 	MasterDashHandler := handlers.NewHandler(tmplMasterDash)
 	VoiceFileHandler := &handlers.Handler{}
+	DroneDashHandler := handlers.NewHandler(tmplDroneDash)
 
 	// Set-Up the static server
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(dir))))
-	// r.HandleFunc("/", handlers.)
-	// r.HandleFunc("/home", func(w http.ResponseWriter, r http.Request))
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "https://0.0.0.0/login", http.StatusSeeOther)
+	})
 	r.HandleFunc("/login", LoginPageHandler.StaticLogin)
 	r.HandleFunc("/u", LoginPageHandler.HandleLogin)
 	r.HandleFunc("/signup", SignupPageHandler.HandleSignup)
@@ -48,7 +51,8 @@ func main() {
 	r.HandleFunc("/voice", handlers.HandleVoice)
 	r.HandleFunc("/u/{userhandle}/dashboard/cachetofull", VoiceFileHandler.AuthUser(VoiceFileHandler.HandleCacheFile))
 	r.HandleFunc("/u/time", handlers.HandleTime)
-	// r.HandleFunc("/u/{userhandler/dashboard/drone}", func(w http.ResponseWriter, r http.Request))
+	r.HandleFunc("/u/{userhandle}/dashboard/drone", DroneDashHandler.AuthUser(DroneDashHandler.HandleDroneDash))
+	r.HandleFunc("/u/{userhandle}/ping", handlers.HandleFast)
 
 	// Custom Setting
 	server := &http.Server{

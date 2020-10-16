@@ -7,12 +7,13 @@ import requests
 API_KEY = "LlWlRvYlJNihsd8SGZZK"
 API_ENDPOINT = "https://0.0.0.0/u/time"
 
-alert_time = datetime.timedelta(seconds=60)
+alert_time = datetime.timedelta(seconds=20)
 path = "../static/user"
 
 def alert(filep):
-    data = {'api_key': API_KEY, 'file': filep}
-    r = requests.post(url = API_ENDPOINT, data = data)
+    cont = os.path.dirname(filep)
+    f = open(cont+"/go.txt", "w")
+    f.close()
 
 while True:
     files = glob.glob(path + "/**/*.wav", recursive=True)

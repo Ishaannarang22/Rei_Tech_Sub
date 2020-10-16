@@ -1,0 +1,21 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+
+<script>
+	var username = window.location.pathname.split("/")[2];
+	
+	var myVar = setInterval(loopTimer, 15000);
+	function loopTimer(){
+		$.get("https://0.0.0.0/u/"+username+"/ping", function(responseText) {
+				if (responseText!="") {
+				document.body.innerHTML += `<audio autoplay style="visiblity: hidden;">
+       						<source src="${responseText}" type="audio/wav">
+					</audio>`;
+				break
+					}
+		});
+
+
+		throw new Error("Nothing went wrong!");
+	}
+</script>
